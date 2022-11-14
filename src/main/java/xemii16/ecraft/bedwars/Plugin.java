@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xemii16.ecraft.bedwars.arena.commands.ArenaCMDCompleter;
 import xemii16.ecraft.bedwars.arena.commands.JoinGUI;
 import xemii16.ecraft.bedwars.arena.events.InventoryClickListener;
+import xemii16.ecraft.bedwars.arena.events.PlayerInteractListener;
 import xemii16.ecraft.bedwars.game.commands.GameCMD;
 import xemii16.ecraft.bedwars.arena.commands.ArenaCMD;
 import xemii16.ecraft.bedwars.game.commands.GameCMDCompleter;
@@ -23,6 +24,7 @@ public final class Plugin extends JavaPlugin {
         getCommand("team").setTabCompleter(new TeamCMDCompleter());
         getCommand("game").setTabCompleter(new GameCMDCompleter());
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(), this);
 
     }
 

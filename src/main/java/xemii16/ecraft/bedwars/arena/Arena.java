@@ -61,7 +61,7 @@ public class Arena {
 
     }
 
-    public void startTimer (int time){
+    public void startTimer (int time, Arena arena){
         final int[] seconds = {time};
         new BukkitRunnable(){
             @Override
@@ -71,7 +71,7 @@ public class Arena {
                 }
                 if (seconds[0] <= 0){
                     this.cancel();
-                    getGame().startGame();
+                    getGame().startGame(arena);
                 }
             }
         }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);

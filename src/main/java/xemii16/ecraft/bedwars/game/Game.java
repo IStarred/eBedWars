@@ -5,9 +5,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import xemii16.ecraft.bedwars.Plugin;
+import xemii16.ecraft.bedwars.arena.Arena;
 import xemii16.ecraft.bedwars.team.Team;
 
 import java.util.ArrayList;
+
+import static xemii16.ecraft.bedwars.arena.Arena.ArenaHashMap;
 
 public class Game {
 
@@ -54,12 +57,28 @@ public class Game {
 
     /* STARTERS */
 
-    public void startGame (){
-        for (Team team : teams){
-            for (Player player : team.getPlayers()){
-                player.teleport(team.getSpawnLocation());
-                player.setHealth(20);
-                player.setFoodLevel(20);
+    public void startGame (Arena arena){
+        startIronSpawn();
+        startGoldSpawn();
+        startBronzeSpawn();
+        arena.getGame().setActive(true);
+        for (Player player : arena.getPlayers()){
+            for (Team team : arena.getGame().getTeams()){
+                if (team.getPlayers().contains(player)){
+                    player.teleport(team.getSpawnLocation());
+                    player.setHealth(20);
+                    player.setFoodLevel(20);
+                }
+            }
+            for (Team team : arena.getGame().getTeams()){
+                if (!team.getPlayers().contains(player)){
+                    if (team.getPlayers().size() < arena.getPlayersPerTeam()){
+                        team.getPlayers().add(player);
+                        player.teleport(team.getSpawnLocation());
+                        player.setHealth(20);
+                        player.setFoodLevel(20);
+                    }
+                }
             }
         }
     }

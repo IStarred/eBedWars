@@ -13,6 +13,7 @@ public class InventoryClickListener implements Listener {
     public void InventoryClickEvent(InventoryClickEvent e ){
         Player player = (Player) e.getWhoClicked();
         arenasJoinGUI.event(e);
+        e.setCancelled(true);
     }
 }
 

@@ -1,10 +1,14 @@
 package xemii16.ecraft.bedwars.arena.events.voids;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import xemii16.ecraft.bedwars.arena.Arena;
 
 import java.util.ArrayList;
@@ -26,13 +30,27 @@ public class ArenasJoinGUI {
                     ArrayList<Player> players = arena.getPlayers();
                     players.add(player);
                     ArenaHashMap.get(arena).setPlayers(players);
+                    for (Player player1 : arena.getPlayers()){
+                        player1.sendMessage("До гри приєднався" + player1.getDisplayName());
+                    }
                     e.setCancelled(true);
                     player.closeInventory();
+                    Inventory inventory = e.getInventory();
+                    ItemStack itemStack = new ItemStack(Material.RED_BED, 1);
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    itemMeta.setDisplayName("Команди");
+                    itemStack.setItemMeta(itemMeta);
+                    inventory.setItem(36, itemStack);
+                    ItemStack itemStack1 = new ItemStack(Material.IRON_DOOR, 1);
+                    ItemMeta itemMeta1 = itemStack1.getItemMeta();
+                    itemMeta1.setDisplayName("Вийти");
+                    itemStack1.setItemMeta(itemMeta1);
+                    inventory.setItem(44, itemStack1);
                     int NumberOfTeams = arena.getNumberOfTeams();
                     int PlayersPerTeam = arena.getPlayersPerTeam();
                     int allPlayers = NumberOfTeams * PlayersPerTeam;
                     if (arena.getPlayers().size() == allPlayers){
-                        arena.startTimer(5);
+                        arena.startTimer(5, arena);
                     }
                 }
         }
