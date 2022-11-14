@@ -13,6 +13,8 @@ import java.util.HashMap;
 
 
 public class Arena {
+
+    public static String prefix = ChatColor.BOLD + "" + ChatColor.AQUA + "[eCraft]";
     private String ArenaName;
     private ArrayList<Player> Players;
     private Location LobbySpawn;

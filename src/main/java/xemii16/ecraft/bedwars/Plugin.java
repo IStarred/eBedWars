@@ -13,6 +13,7 @@ import xemii16.ecraft.bedwars.team.commands.TeamCMD;
 import xemii16.ecraft.bedwars.team.commands.TeamCMDCompleter;
 
 public final class Plugin extends JavaPlugin {
+
     @Override
     public void onEnable() {
         getCommand("arena").setExecutor(new ArenaCMD());
