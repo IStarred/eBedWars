@@ -35,17 +35,17 @@ public class ArenasJoinGUI {
                     }
                     e.setCancelled(true);
                     player.closeInventory();
-                    Inventory inventory = e.getInventory();
+                    player.getInventory().clear();
                     ItemStack itemStack = new ItemStack(Material.RED_BED, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
                     itemMeta.setDisplayName("Команди");
                     itemStack.setItemMeta(itemMeta);
-                    inventory.setItem(36, itemStack);
+                    player.getInventory().setItem(36, itemStack);
                     ItemStack itemStack1 = new ItemStack(Material.IRON_DOOR, 1);
                     ItemMeta itemMeta1 = itemStack1.getItemMeta();
                     itemMeta1.setDisplayName("Вийти");
                     itemStack1.setItemMeta(itemMeta1);
-                    inventory.setItem(44, itemStack1);
+                    player.getInventory().setItem(46, itemStack1);
                     int NumberOfTeams = arena.getNumberOfTeams();
                     int PlayersPerTeam = arena.getPlayersPerTeam();
                     int allPlayers = NumberOfTeams * PlayersPerTeam;
