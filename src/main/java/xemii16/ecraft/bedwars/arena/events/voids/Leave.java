@@ -10,15 +10,18 @@ import static xemii16.ecraft.bedwars.arena.Arena.ArenaHashMap;
 public class Leave {
 
     public void event (PlayerInteractEvent e){
-        if (!e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Вийти")) return;
         Player player = e.getPlayer();
-        for (Arena arena : ArenaHashMap.values()){
-            if (!arena.getLobbySpawn().getWorld().equals(player.getWorld())) return;
-            arena.getPlayers().remove(player);
-            for (Team team : arena.getGame().getTeams()){
-                if (!team.getPlayers().contains(player)) return;
-                team.getPlayers().remove(player);
-            }
+        if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Вийти")){
+            for (Arena arena : ArenaHashMap.values()){
+                if (!arena.getLobbySpawn().getWorld().equals(player.getWorld())) return;
+                arena.getPlayers().remove(player);
+                e.setCancelled(true);
+                for (Team team : arena.getGame().getTeams()){
+                    if (!team.getPlayers().contains(player)) return;
+                    team.getPlayers().remove(player);
+                    e.setCancelled(true);
+                }
+        }
         }
     }
 

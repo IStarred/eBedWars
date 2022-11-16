@@ -16,7 +16,6 @@ public class InventoryClickListener implements Listener {
         Player player = (Player) e.getWhoClicked();
         arenasJoinGUI.event(e);
         teamAdder.event(e);
-        e.setCancelled(true);
     }
 }
 

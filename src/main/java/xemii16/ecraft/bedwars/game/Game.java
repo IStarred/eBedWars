@@ -63,6 +63,7 @@ public class Game {
         startBronzeSpawn();
         arena.getGame().setActive(true);
         for (Player player : arena.getPlayers()){
+            player.getInventory().clear();
             for (Team team : arena.getGame().getTeams()){
                 if (team.getPlayers().contains(player)){
                     player.teleport(team.getSpawnLocation());
@@ -72,7 +73,7 @@ public class Game {
             }
             for (Team team : arena.getGame().getTeams()){
                 if (!team.getPlayers().contains(player)){
-                    if (team.getPlayers().size() < arena.getPlayersPerTeam()){
+                    if (team.getPlayers().size() <= arena.getPlayersPerTeam()){
                         team.getPlayers().add(player);
                         player.teleport(team.getSpawnLocation());
                         player.setHealth(20);

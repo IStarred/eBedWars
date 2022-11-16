@@ -16,7 +16,6 @@ public class ArenaSet {
 
             //
             Arena arena = ArenaHashMap.get(playerLinkArena.get(player));
-            Game game = arena.getGame();
 
 
             if (playerLinkArena.containsKey(player.getPlayer())){

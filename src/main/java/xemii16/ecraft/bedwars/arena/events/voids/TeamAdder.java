@@ -12,15 +12,19 @@ public class TeamAdder {
     public void event (InventoryClickEvent e){
         Player player = (Player) e.getWhoClicked();
         for (Arena arena : ArenaHashMap.values()){
-            if (!arena.getLobbySpawn().equals(player.getWorld())) return;
             for (Team team : arena.getGame().getTeams()){
-                if (team.getBedMaterial().equals(e.getCurrentItem())){
-                    if (!(team.getPlayers().size() < arena.getPlayersPerTeam())) return;
-                    team.getPlayers().add(player);
-                    player.sendMessage("Ви вибрали команду" + team.getChatColor() + team.getGameName());
+                if (arena.getPlayersPerTeam() > team.getPlayers().size()){
+                    if (arena.getLobbySpawn().getWorld().equals(player.getWorld())){
+                        if (team.getBedMaterial().equals(e.getCurrentItem())){
+                            team.getPlayers().add(player);
+                            player.sendMessage("Ви вибрали команду" + team.getChatColor() + team.getGameName());
+                            e.setCancelled(true);
+                        }
+                    }
                 }
             }
         }
+
     }
 
 }

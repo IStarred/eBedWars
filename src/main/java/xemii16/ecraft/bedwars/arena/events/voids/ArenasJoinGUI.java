@@ -1,12 +1,10 @@
 package xemii16.ecraft.bedwars.arena.events.voids;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import xemii16.ecraft.bedwars.arena.Arena;
@@ -24,12 +22,13 @@ public class ArenasJoinGUI {
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.AQUA + "Арени БедВарсу")){
                 if(e.getCurrentItem().getType().equals(Material.EMERALD_BLOCK)){
                     String arenaName = e.getCurrentItem().getItemMeta().getDisplayName();
-                    Arena arena = ArenaHashMap.get(arenaName);
+                    String[] name = arenaName.split(" ");
+                    Arena arena = ArenaHashMap.get(name[0]);
                     Location location = arena.getLobbySpawn();
                     player.teleport(location);
                     ArrayList<Player> players = arena.getPlayers();
                     players.add(player);
-                    ArenaHashMap.get(arena).setPlayers(players);
+                    arena.setPlayers(players);
                     for (Player player1 : arena.getPlayers()){
                         player1.sendMessage("До гри приєднався" + player1.getDisplayName());
                     }
