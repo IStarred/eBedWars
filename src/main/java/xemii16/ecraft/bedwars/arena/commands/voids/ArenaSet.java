@@ -13,8 +13,6 @@ public class ArenaSet {
 
     public void command (Player player, String[] args){
         if (args[0].equalsIgnoreCase("set")){
-
-            //
             Arena arena = ArenaHashMap.get(playerLinkArena.get(player));
 
 

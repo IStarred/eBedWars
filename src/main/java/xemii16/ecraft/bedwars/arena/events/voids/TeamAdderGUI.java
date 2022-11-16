@@ -15,7 +15,7 @@ import static xemii16.ecraft.bedwars.arena.Arena.ArenaHashMap;
 public class TeamAdderGUI {
 
     public void event (PlayerInteractEvent e){
-        if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Команди")){
+        if (e.getItem() != null && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Команди")){
             Inventory inventory = Bukkit.createInventory(e.getPlayer(), 9);
             for (Arena arena : ArenaHashMap.values()){
                 if (arena.getLobbySpawn().getWorld().equals(e.getPlayer().getWorld())){

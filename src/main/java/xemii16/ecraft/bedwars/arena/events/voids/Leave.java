@@ -11,7 +11,7 @@ public class Leave {
 
     public void event (PlayerInteractEvent e){
         Player player = e.getPlayer();
-        if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Вийти")){
+        if (e.getItem() != null && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Вийти")){
             for (Arena arena : ArenaHashMap.values()){
                 if (!arena.getLobbySpawn().getWorld().equals(player.getWorld())) return;
                 arena.getPlayers().remove(player);

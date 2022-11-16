@@ -3,6 +3,8 @@ package xemii16.ecraft.bedwars.arena;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import xemii16.ecraft.bedwars.Plugin;
@@ -21,6 +23,8 @@ public class Arena {
 
     private Game game;
 
+    private BossBar bossBar;
+
 
     private int id;
 
@@ -31,7 +35,7 @@ public class Arena {
     private boolean Active;
 
     public static HashMap<String, Arena> ArenaHashMap = new HashMap<>();
-    public Arena(String ArenaName, int id, boolean Active, ArrayList<Player> Players, Location LobbySpawn, Game game, int playersPerTeam, int numberOfTeams){
+    public Arena(String ArenaName, int id, boolean Active, ArrayList<Player> Players, Location LobbySpawn, Game game, int playersPerTeam, int numberOfTeams, BossBar bossBar){
         this.ArenaName = ArenaName;
         this.id = id;
         this.Players = Players;
@@ -40,6 +44,7 @@ public class Arena {
         this.game = game;
         this.playersPerTeam = playersPerTeam;
         this.numberOfTeams = numberOfTeams;
+        this.bossBar = bossBar;
 
     }
 
@@ -65,22 +70,37 @@ public class Arena {
 
     public void startTimer (int time, Arena arena){
         final int[] seconds = {time};
+        int secondsTotal = seconds[0];
+        double secondsDouble = time;
+        bossBar.setColor(BarColor.GREEN);
+        bossBar.setTitle("Гра починається!");
+
+
         new BukkitRunnable(){
             @Override
             public void run(){
                 for (Player players : Players){
-                    players.sendMessage("Гра почнеться через " + seconds[0]-- + "секунд");
+                    players.sendTitle(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]--, ChatColor.GRAY + "Приготуйтеся!", 5, 10, 5);
                 }
                 if (seconds[0] <= 0){
                     this.cancel();
                     getGame().startGame(arena);
                 }
+                bossBar.setProgress(secondsDouble / secondsTotal);
             }
         }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);
     }
 
 
     /* GETTERS AND SETTERS */
+
+    public BossBar getBossBar() {
+        return bossBar;
+    }
+
+    public void setBossBar(BossBar bossBar) {
+        this.bossBar = bossBar;
+    }
 
     public Game getGame() {
         return game;

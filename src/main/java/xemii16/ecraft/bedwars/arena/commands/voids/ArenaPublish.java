@@ -26,6 +26,8 @@ public class ArenaPublish {
                                             arena.setActive(true);
                                             playerLinkArena.remove(player);
                                             player.sendMessage(ChatColor.GREEN + "Арена" + arena.getArenaName() + " опублікована!");
+                                            arena.getBossBar().setProgress(0);
+                                            arena.getBossBar().setVisible(true);
                                         } else {
                                             player.sendMessage(ChatColor.GOLD + "У команди" + team.getName() + "немає ігрового імені (під час гри)");
                                         }
