@@ -75,20 +75,33 @@ public class Arena {
         final double[] progress = {secondsDouble[0] / secondsTotal};
         bossBar.setColor(BarColor.GREEN);
         bossBar.setTitle("Гра починається!");
-
-
         new BukkitRunnable(){
             @Override
             public void run(){
                 for (Player players : Players){
-                    players.sendTitle(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]--, ChatColor.GRAY + "Приготуйтеся!", 5, 10, 5);
+                    players.sendTitle(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]--, ChatColor.GRAY + "Приготуйтеся!", 0, 20, 0);
+                    players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 }
-                if (seconds[0] <= 0){
+                if (seconds[0] <= 5){
                     this.cancel();
-                    getGame().startGame(arena);
                 }
                 bossBar.setProgress(progress[0]);
                 secondsDouble[0]--;
+            }
+        }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (seconds[0] <= 5){
+                    for (Player players : Players){
+                        players.sendTitle(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]--, ChatColor.GRAY + "Приготуйтеся!", 0, 20, 0);
+                        players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                }
+                    if (seconds[0] == 0){
+                        this.cancel();
+
+                    }
+                }
             }
         }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);
     }
