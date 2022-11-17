@@ -1,6 +1,8 @@
 package xemii16.ecraft.bedwars.arena.events.voids;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import xemii16.ecraft.bedwars.arena.Arena;
 import xemii16.ecraft.bedwars.team.Team;
