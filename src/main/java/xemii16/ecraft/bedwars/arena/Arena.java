@@ -71,7 +71,8 @@ public class Arena {
     public void startTimer (int time, Arena arena){
         final int[] seconds = {time};
         int secondsTotal = seconds[0];
-        double secondsDouble = time;
+        final double[] secondsDouble = {time};
+        final double[] progress = {secondsDouble[0] / secondsTotal};
         bossBar.setColor(BarColor.GREEN);
         bossBar.setTitle("Гра починається!");
 
@@ -86,7 +87,8 @@ public class Arena {
                     this.cancel();
                     getGame().startGame(arena);
                 }
-                bossBar.setProgress(secondsDouble / secondsTotal);
+                bossBar.setProgress(progress[0]);
+                secondsDouble[0]--;
             }
         }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);
     }

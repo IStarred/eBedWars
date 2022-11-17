@@ -58,7 +58,8 @@ public class ArenasJoinGUI {
                 }
                 if (arena.getPlayers().size() < allPlayers){
                     double size = arena.getPlayers().size();
-                    bossBar.setProgress(size / allPlayers);
+                    double progress = size / allPlayers;
+                    bossBar.setProgress(progress);
 
                 }
             }
