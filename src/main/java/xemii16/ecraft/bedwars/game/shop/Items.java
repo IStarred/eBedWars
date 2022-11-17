@@ -12,10 +12,7 @@ import java.util.Map;
 
 public class Items {
 
-    Inventory inventory = Bukkit.createInventory(null, 27, "Покупка предметів");
-
-
-
+    Inventory shop = Bukkit.createInventory(null, 27);
     private ItemStack itemStack (Material material, Integer amount, String displayName, List<String> lore, Map<Enchantment, Integer> enchantmentIntegerMap){
         ItemStack itemStack = new ItemStack(material, amount);
         itemStack.addUnsafeEnchantments(enchantmentIntegerMap);
