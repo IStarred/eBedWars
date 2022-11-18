@@ -14,6 +14,8 @@ import static xemii16.ecraft.bedwars.arena.Arena.ArenaHashMap;
 
 public class Game {
 
+    private Arena arena;
+
     private ArrayList<Team> teams;
 
     private final long bronzeSpawnCD = 20L;
@@ -126,20 +128,44 @@ public class Game {
 
     /* UTILITIES */
 
-    public void onBedBreak(Location location){
+    public void onBedBreak(Material material){
         for (Team team : teams){
-            if(team.getBedLocation().equals(location)){
+            if(team.getBedMaterial().equals(material)){
                 team.setBedLocation(null);
             }
         }
     }
 
     public void onPlayerDeath(Player player){
+        for (Player players : world.getPlayers()){
+            players.sendMessage("Гравець " + player.getDisplayName() + "випадково помер!");
+        }
         for (Team team : teams){
             if (team.getPlayers().contains(player)){
                 if(team.getBedLocation() != null){
+                    player.sendTitle("Відродження через", "", 10, 20, 10);
+                    player.setHealth(20);
+                    player.setFoodLevel(20);
+                    player.setGameMode(GameMode.SPECTATOR);
+                    player.teleport(new Location(getWorld(), 0, 100, 0));
+
+                    new BukkitRunnable() {
+
+                        int time = 5;
+                        @Override
+                        public void run() {
+                            player.sendTitle(ChatColor.BOLD + "" + time, "", 0, 20, 0);
+                            time--;
+                            if (time <= 0){
+                                this.cancel();
+                            }
+                        }
+                    }.runTaskTimer(Plugin.getPlugin(Plugin.class), 10L, 20L);
                     player.teleport(team.getSpawnLocation());
                 }else{
+                    for (Player players : world.getPlayers()){
+                       players.sendMessage("Гравець " + arena.getPlayers() + " назавжди покінчив з собою :c ");
+                    }
                     moveToSpectator(player, team);
                 }
             }

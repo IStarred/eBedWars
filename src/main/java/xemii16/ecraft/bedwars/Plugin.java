@@ -9,6 +9,8 @@ import xemii16.ecraft.bedwars.arena.events.PlayerInteractListener;
 import xemii16.ecraft.bedwars.game.commands.GameCMD;
 import xemii16.ecraft.bedwars.arena.commands.ArenaCMD;
 import xemii16.ecraft.bedwars.game.commands.GameCMDCompleter;
+import xemii16.ecraft.bedwars.game.events.BedBreakEvent;
+import xemii16.ecraft.bedwars.game.events.EntityDamageEvent;
 import xemii16.ecraft.bedwars.team.commands.TeamCMD;
 import xemii16.ecraft.bedwars.team.commands.TeamCMDCompleter;
 
@@ -26,6 +28,8 @@ public final class Plugin extends JavaPlugin {
         getCommand("game").setTabCompleter(new GameCMDCompleter());
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BedBreakEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityDamageEvent(), this);
 
     }
 

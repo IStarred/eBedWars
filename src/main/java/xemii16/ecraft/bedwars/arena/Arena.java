@@ -79,16 +79,17 @@ public class Arena {
             @Override
             public void run(){
                 for (Player players : Players){
-                    players.sendTitle(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]--, ChatColor.GRAY + "Приготуйтеся!", 0, 20, 0);
+                    players.sendMessage(ChatColor.BOLD + "" + ChatColor.GOLD + "" + seconds[0]);
                     players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 }
+                seconds[0] = seconds[0] - 5;
                 if (seconds[0] <= 5){
                     this.cancel();
                 }
                 bossBar.setProgress(progress[0]);
                 secondsDouble[0]--;
             }
-        }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 20L);
+        }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 100L);
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -99,6 +100,7 @@ public class Arena {
                 }
                     if (seconds[0] == 0){
                         this.cancel();
+                        game.startGame(arena);
 
                     }
                 }

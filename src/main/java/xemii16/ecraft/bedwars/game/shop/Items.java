@@ -7,12 +7,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Items {
 
-    Inventory shop = Bukkit.createInventory(null, 27);
+    Inventory shop = Bukkit.createInventory(null, 54);
+
+
+    public void shop (Inventory shop){
+    }
+
     private ItemStack itemStack (Material material, Integer amount, String displayName, List<String> lore, Map<Enchantment, Integer> enchantmentIntegerMap){
         ItemStack itemStack = new ItemStack(material, amount);
         itemStack.addUnsafeEnchantments(enchantmentIntegerMap);
