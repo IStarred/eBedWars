@@ -13,7 +13,7 @@ public class BedBreakEvent implements Listener {
     @EventHandler
     public void event (BlockBreakEvent e){
         if (e.getBlock().getType() != Material.BEDROCK && e.getBlock().getType().toString().contains("BED")){
-            game.onBedBreak(e.getBlock().getType());
+            game.onBedBreak(e.getBlock().getType(), e.getPlayer());
         }
     }
 }

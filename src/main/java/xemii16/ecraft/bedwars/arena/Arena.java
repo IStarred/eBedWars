@@ -83,11 +83,11 @@ public class Arena {
                     players.playSound(players.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 }
                 seconds[0] = seconds[0] - 5;
+                bossBar.setProgress(progress[0]);
+                secondsDouble[0]--;
                 if (seconds[0] <= 5){
                     this.cancel();
                 }
-                bossBar.setProgress(progress[0]);
-                secondsDouble[0]--;
             }
         }.runTaskTimer(Plugin.getPlugin(Plugin.class), 0L, 100L);
         new BukkitRunnable() {

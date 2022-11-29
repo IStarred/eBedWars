@@ -1,7 +1,12 @@
 package xemii16.ecraft.bedwars.team.commands.voids;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.Player;
 import xemii16.ecraft.bedwars.team.Team;
 
@@ -107,7 +112,11 @@ public class TeamSet {
                     for (Team team : ArenaHashMap.get(playerLinkArena.get(player)).getGame().getTeams()){
                         if (team.getName().equalsIgnoreCase(playerLinkTeam.get(player))){
                             team.setBedLocation(player.getLocation());
-                            player.sendMessage(ChatColor.GREEN + "Локація ліжка команди " + team.getName() + " успішно встановлене");
+                            Block block = player.getLocation().getBlock();
+                            block.setType(team.getBedMaterial());
+                            Bed bed = (Bed) block.getBlockData();
+                            bed.setPart(Bed.Part.FOOT);
+                            player.sendMessage(ChatColor.GREEN + "Локація ліжка команди " + team.getName() + " успішно встановлена");
                         }
                     }
                 } else {

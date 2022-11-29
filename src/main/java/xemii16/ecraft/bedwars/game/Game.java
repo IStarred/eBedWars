@@ -1,6 +1,8 @@
 package xemii16.ecraft.bedwars.game;
 
 import org.bukkit.*;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -83,6 +85,14 @@ public class Game {
                     }
                 }
             }
+            for (Team team : arena.getGame().getTeams()){
+                Location location = team.getBedLocation();
+                Material material = team.getBedMaterial();
+                location.getBlock().setType(material);
+                Bed bed = (Bed) location.getBlock();
+                bed.setPart(Bed.Part.FOOT);
+                
+            }
         }
     }
 
@@ -128,10 +138,14 @@ public class Game {
 
     /* UTILITIES */
 
-    public void onBedBreak(Material material){
+    public void onBedBreak(Material material, Player player){
         for (Team team : teams){
             if(team.getBedMaterial().equals(material)){
-                team.setBedLocation(null);
+                if (team.getPlayers().contains(player)){
+                    return;
+                } else {
+                    team.setBedLocation(null);
+                }
             }
         }
     }
